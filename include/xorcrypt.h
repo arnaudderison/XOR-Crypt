@@ -2,5 +2,6 @@
 #define __xorcrypt__
 
 void help(void);
+void paramsTest(char *arg, char *key, char path[255], char dest[255]);
 
 #endif
