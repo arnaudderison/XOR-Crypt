@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
     if(argc == 1 || argc == 2){
         help();
     }else if (argc == 5){
-        paramsTest(argv[1], argv[2], argv[3], argv[4]);
+        paramsTest(argv[1], argv[3], argv[2], argv[4]);
     }  
     return 0;
 }   
@@ -26,28 +26,54 @@ void help(void){
 }
 
 void paramsTest(char *arg, char *key, char path[255], char dest[255]){
-    printf("%c", arg);
     if(strcmp(arg, "-c") == 0)
-        puts("Il faut crypter le fichier");
+        crypt(arg, key, path, dest);
 
     else if (strcmp(arg, "-d") == 0)
-        puts("IL faut décrypter le fichier");
+        crypt(arg, key, path, dest);
 
     else
         help();   
 }
 
-int crypt(char *key, char path[255], char dest[255]){
+int crypt(char *arg, char *key, char path[255], char dest[255]){
     int c, i, countKey = 0;
 
     if(key != NULL && path != NULL && dest != NULL){
+        printf("%s\n", path);
         if(PATH = fopen(path, "rb")){ //open file in binairy read mode
+            DEST = fopen(dest, "wb");
 
+            while((c=fgetc(PATH)) != EOF){
+
+                if(strcmp(arg, "-c") == 0){
+                    c = ~c;
+                    c ^= key[countKey];
+                }else{
+                    c ^= key[countKey];
+                    c = ~c;
+                }
+                
+                fprintf(DEST, "%c", c);
+
+                if(countKey != strlen(key))
+                    countKey += 1;
+                else
+                    countKey = 0;
+            }
+            fclose(PATH);
+            fclose(DEST);
+            puts("Finish");
+
+            return 1;
         }else{
             puts("Impossible to open the source file");
+            return 0;
         }
     }else{
         puts("Invalid parameter");
         help();
+        return 0;
     }
 }
+
