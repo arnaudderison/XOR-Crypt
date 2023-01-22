@@ -4,9 +4,11 @@ xorcrypt is a simple [symmetric cryptography](https://fr.wikipedia.org/wiki/Cryp
 
 #usage
 
-```gcc ./src/main.c -o xorcrypt```
+```
+gcc ./src/main.c -o xorcrypt
+```
 
-`
+```
 Encrypt file:    xorcrypt -c [Filename] [Key] [Destination]
 Decrypt file:    xorcrypt -d [Filename] [Key] [Destination]
-`
+```
